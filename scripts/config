@@ -91,7 +91,7 @@ ynh_app_config_validate() {
         ynh_die --message="You need to set a password to enable SFTP"
     fi
 
-    if [ "${changed[fpm_usage]}" == "true" ] || [ "${changed[fpm_footprint]}" == "true" ] || [ "${changed[fpm_free_footprint]}" == "true" ]; then
+    if [ "${changed[fpm_usage]:-false}" == "true" ] || [ "${changed[fpm_footprint]:-false}" == "true" ] || [ "${changed[fpm_free_footprint]:-false}" == "true" ]; then
         # If fpm_footprint is set to 'specific', use $fpm_free_footprint value.
         if [ "$fpm_footprint" = "specific" ]
         then
@@ -110,7 +110,7 @@ ynh_app_config_validate() {
 ynh_app_config_apply() {
     _ynh_app_config_apply
 
-    if [ "${changed[phpversion]}" == "true" ]
+    if [ "${changed[phpversion]:-false}" == "true" ]
     then
         if [ "${old[phpversion]}" != "none" ]
         then
